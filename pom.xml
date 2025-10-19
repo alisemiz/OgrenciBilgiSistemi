@@ -1,0 +1,123 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ali.obs</groupId>
+    <artifactId>OgrenciBilgiSistemi</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- ⚠️ JDK sürümünü 20 yapıyoruz -->
+        <maven.compiler.source>20</maven.compiler.source>
+        <maven.compiler.target>20</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <javafx.version>21</javafx.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${javafx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.43.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Java kodunu derlemek için -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>20</source>
+                    <target>20</target>
+                </configuration>
+            </plugin>
+
+            <!-- JavaFX çalıştırma -->
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
+                <configuration>
+                    <mainClass>com.ali.obs.Main</mainClass>
+                </configuration>
+            </plugin>
+
+            <!-- Bağımlılıkları target/lib'e kopyala -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- jpackage -->
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <!-- Gerekirse 1.7.0 yapabilirsin -->
+                <version>1.7.0</version>
+                <executions>
+                    <execution>
+                        <id>jpackage</id>
+                        <goals>
+                            <goal>jpackage</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <name>OgrenciBilgiSistemi</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>Ali</vendor>
+                    <destination>target/dist</destination>
+
+                    <!-- 🆕 input eklendi -->
+                    <input>target</input>
+
+                    <mainJar>${project.build.finalName}.jar</mainJar>
+                    <mainClass>com.ali.obs.Main</mainClass>
+
+                    <modulePaths>
+                        <path>target/lib</path>
+                    </modulePaths>
+
+                    <addModules>
+                        <module>javafx.controls</module>
+                        <module>javafx.fxml</module>
+                        <module>java.sql</module>
+                    </addModules>
+
+                    <type>app-image</type>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
