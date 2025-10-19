@@ -6,17 +6,6 @@ Bu proje, JavaFX ve SQLite kullanılarak geliştirilmiş, modern ve kullanıcı 
 
 ---
 
-## Önemli Not: Ekran Görüntüsü
-Bu README dosyasının profesyonel görünmesi için projenizin bir ekran görüntüsünü eklemeniz çok önemlidir.
-1.  Uygulamanızı çalıştırın ve birkaç öğrenci ekleyerek tablonun dolu görünmesini sağlayın.
-2.  Ekran görüntüsü alın.
-3.  Projenizin ana klasöründe **`images`** adında yeni bir klasör oluşturun.
-4.  Ekran görüntüsünü bu klasörün içine **`screenshot.png`** adıyla kaydedin.
-Bu işlemi yaptığınızda, aşağıdaki resim otomatik olarak görünecektir.
-
-![Uygulama Ekran Görüntüsü](images/screenshot.png)
-
----
 
 ## 🚀 Özellikler
 
@@ -91,6 +80,3 @@ Projenin dağıtılabilir bir Windows kurulum dosyası (`.exe`) oluşturması i�
 
 ---
 
-## 📄 Lisans
-
-Bu proje MIT Lisansı altında lisanslanmıştır. Detaylar için `LICENSE` dosyasına bakınız.
